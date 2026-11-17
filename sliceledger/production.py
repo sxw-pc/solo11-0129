@@ -16,9 +16,12 @@ def import_runs(path,file):
             for row in payload.get('rows',[]):
                 key=str(row['id']);job=db.execute('SELECT * FROM slice_export WHERE id=?',(str(row['job']),)).fetchone()
                 reservation=db.execute('SELECT * FROM reservation WHERE id=?',(str(row['reservation']),)).fetchone()
+                from .lot_quality import latest
+                inspected=latest(db,json.loads(reservation['body'])['lot']) if reservation else None
                 events=row.get('events',[]);state=None;reason='run_completed'
                 if not job or job['status']!='可开机候选' or not reservation or reservation['status']!='已预留':
                     status,reason='待核','upstream_not_ready'
+                elif inspected and inspected['status']!='合格':status,reason='待核','lot_quarantined'
                 elif row.get('machine')!=json.loads(job['body'])['machine']:status,reason='待核','machine_mismatch'
                 elif not events or events[0].get('state')!='queued':status,reason='待核','missing_queue_event'
                 else:

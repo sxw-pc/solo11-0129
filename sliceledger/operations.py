@@ -38,8 +38,10 @@ def second(path,file):
                 snapshot_conflict=bool(existing_lot and existing_lot['body']!=json.dumps(
                     {'lot':row['lot'],'material':row['material'],'available_grams':row['available_grams']},sort_keys=True,ensure_ascii=False))
                 from .inventory import balance_db
+                from .lot_quality import latest
                 available=balance_db(db,str(row['lot']))['available']
                 if snapshot_conflict:status,reason='待核','inventory_snapshot_conflict'
+                elif latest(db,row['lot']) and latest(db,row['lot'])['status']!='合格':status,reason='待换料','lot_quarantined'
                 elif not job or job['status']!='可开机候选':status,reason='待核','slice_unqualified'
                 elif row['material']!=job_data['material']:status,reason='待换料','material_mismatch'
                 elif float(row['grams'])>available or float(row['grams'])<float(job_data['grams']):status,reason='待换料','insufficient_inventory'
@@ -62,11 +64,13 @@ def third(path,file):
                     results.append(decide(db,'制件验收',key,old['status'],old['reason'],source));continue
                 reserve=db.execute('SELECT * FROM reservation WHERE id=?',(str(row['reservation']),)).fetchone()
                 reserved=json.loads(reserve['body']) if reserve else {}
+                from .lot_quality import latest
+                inspection=latest(db,reserved['lot']) if reserve else None
                 measured=row.get('measured',[]);nominal=row.get('nominal',[])
-                run_required=bool(db.execute('SELECT 1 FROM machine_run WHERE json_extract(body,\'$.job\')=?',(str(row['job']),)).fetchone())
                 run=db.execute('SELECT * FROM machine_run WHERE id=?',(str(row.get('run_id','')),)).fetchone()
                 if not job or job['status']!='可开机候选' or not reserve or reserve['status']!='已预留':status,reason='待核','upstream_not_ready'
-                elif run_required and (not run or run['status']!='已完成' or
+                elif inspection and inspection['status']!='合格':status,reason='拒收','lot_quarantined'
+                elif not run or run['status']!='已完成' or (
                       json.loads(run['body'])['job']!=row['job'] or
                       json.loads(run['body'])['reservation']!=row['reservation']):status,reason='待核','machine_run_unverified'
                 elif len(measured)!=len(nominal) or not measured:status,reason='待核','measurement_missing'

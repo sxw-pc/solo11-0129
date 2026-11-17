@@ -11,8 +11,11 @@ def balance_db(db,lot):
                  if json.loads(x['body'])['lot']==lot)
     reserved=sum(float(json.loads(x['body'])['grams']) for x in db.execute("SELECT body FROM reservation WHERE status='已预留'")
                  if json.loads(x['body'])['lot']==lot)
+    from .lot_quality import latest
+    inspection=latest(db,lot)
+    available=initial-consumed-reserved
     return {'lot':lot,'initial':initial,'consumed':consumed,'reserved':reserved,
-            'available':initial-consumed-reserved}
+            'available':available,'usable':available if not inspection or inspection['status']=='合格' else 0}
 
 
 def balance(path,lot):
