@@ -1,7 +1,7 @@
 import argparse,json,tempfile
 from pathlib import Path
-from . import operations,report,production,inventory,lot_quality
-COMMANDS=['slice-import', 'material-reserve', 'part-accept','machine-import','lot-inspect']
+from . import operations,report,production,inventory,lot_quality,feed
+COMMANDS=['slice-import', 'material-reserve', 'part-accept','machine-import','lot-inspect','feed-import']
 def main():
     parser=argparse.ArgumentParser()
     sub=parser.add_subparsers(dest='command',required=True)
@@ -20,6 +20,6 @@ def main():
     elif x.command=='inventory-balance':print(json.dumps(inventory.balance(x.db,x.lot),ensure_ascii=False))
     else:
         fn=[operations.first,operations.second,operations.third,production.import_runs,
-            lot_quality.assess][COMMANDS.index(x.command)]
+            lot_quality.assess,feed.import_feed][COMMANDS.index(x.command)]
         print(json.dumps(fn(x.db,x.file),ensure_ascii=False))
 if __name__=='__main__':main()

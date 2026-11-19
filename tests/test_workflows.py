@@ -1,19 +1,29 @@
 import json
 import pytest
-from sliceledger import operations,report,production,inventory,lot_quality
+from sliceledger import operations,report,production,inventory,lot_quality,feed
 from sliceledger.store import connect
 
 def write(root,name,obj):
     p=root/name;p.write_text(json.dumps(obj),encoding='utf-8');return p
-def job(id='J1',material='PLA',size=None,layer=0.2):
+def job(id='J1',material='PLA',size=None,layer=0.2,usage='外观打样'):
     return dict(id=id,machine='M1',size=size or [20,20,20],build_limit=[200,200,200],
-                nozzle=0.4,layer=layer,material=material,grams=15)
+                nozzle=0.4,layer=layer,material=material,grams=15,usage=usage)
+def feed_payload(run='RUN1',reservation='A1',job='J1',part='P1',lot='L1',used=18,layers=3,fid='F1'):
+    spans=[(i*used/layers,(i+1)*used/layers) for i in range(layers)]
+    return {'version':'v1','rows':[
+        {'id':fid,'run':run,'job':job,'reservation':reservation,'machine':'M1','parts':[part],
+         'extrusions':[0]+[end for _,end in spans],
+         'layers':[{'layer':i+1,'start':start,'end':end} for i,(start,end) in enumerate(spans)],
+         'spool_changes':[],
+         'weighings':[{'lot':lot,'material':'PLA','start_grams':100,'end_grams':100-used}]}]}
 def completed_run(root,db):
     events=[{'seq':1,'state':'queued','at':'2026-01-01T10:00:00'},
             {'seq':2,'state':'running','at':'2026-01-01T10:01:00'},
             {'seq':3,'state':'completed','at':'2026-01-01T11:00:00'}]
-    return production.import_runs(db,write(root,'run.json',{'version':'v1','rows':[
+    out=production.import_runs(db,write(root,'run.json',{'version':'v1','rows':[
         {'id':'RUN1','job':'J1','reservation':'A1','machine':'M1','events':events}]}))
+    feed.import_feed(db,write(root,'feed.json',feed_payload()))
+    return out
 
 def test_slice_material_part_full_chain(tmp_path):
     result=operations.demo(tmp_path)
@@ -41,6 +51,7 @@ def test_dimension_and_consumption_change_acceptance(tmp_path):
     operations.second(db,write(tmp_path,'material.json',{'version':'v1','rows':[
         {'id':'A1','job':'J1','lot':'L1','material':'PLA','available_grams':100,'grams':20}]}))
     completed_run(tmp_path,db)
+    feed.import_feed(db,write(tmp_path,'feed2.json',feed_payload(part='P2',used=25,fid='F2')))
     rows=[{'id':'P1','job':'J1','reservation':'A1','run_id':'RUN1','measured':[22],'nominal':[20],'tolerance':0.2,'used_grams':18},
           {'id':'P2','job':'J1','reservation':'A1','run_id':'RUN1','measured':[20],'nominal':[20],'tolerance':0.2,'used_grams':25}]
     result=operations.third(db,write(tmp_path,'parts.json',{'version':'v1','rows':rows}))
