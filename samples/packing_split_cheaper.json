@@ -1,0 +1,19 @@
+{
+  "version": "v1",
+  "order": {"id": "ORD-S", "contract": "multi", "cutoff": "2026-11-20T18:00:00", "pack_start": "2026-11-20T15:00:00"},
+  "weight_tolerance_kg": 0.1,
+  "parts": [
+    {"id": "A", "size": [150, 100, 80], "weight": 2.0, "cushion": 5, "fragile_faces": [],
+     "rotations": [[[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[0, -1, 0], [1, 0, 0], [0, 0, 1]]]},
+    {"id": "B", "size": [150, 100, 80], "weight": 2.0, "cushion": 5, "fragile_faces": [],
+     "rotations": [[[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[0, -1, 0], [1, 0, 0], [0, 0, 1]]]},
+    {"id": "C", "size": [150, 100, 80], "weight": 2.0, "cushion": 5, "fragile_faces": [],
+     "rotations": [[[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[0, -1, 0], [1, 0, 0], [0, 0, 1]]]}
+  ],
+  "box_types": [
+    {"id": "S", "inner": [280, 240, 100], "tare": 0.4, "max_weight": 4.5, "quantity": 2, "certified": false, "pack_minutes": 15},
+    {"id": "L", "inner": [700, 400, 300], "tare": 1.0, "max_weight": 30, "quantity": 1, "certified": true, "pack_minutes": 30}
+  ],
+  "pricing": {"volumetric_divisor": 5000, "currency": "CNY",
+              "tiers": [{"up_to": 3, "price": 10}, {"up_to": 6, "price": 16}, {"up_to": 12, "price": 24}, {"up_to": 20, "price": 34}]}
+}

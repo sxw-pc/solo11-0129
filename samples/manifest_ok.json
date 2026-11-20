@@ -1,0 +1,9 @@
+{
+  "version": "m1",
+  "rows": [
+    {"id": "M1", "plan": "ORD-C@c1", "box_serial": "S#1", "tracking": "TRK-001",
+     "weighed_kg": 2.4, "seal_scan": "SEAL-001", "sealed_at": "2026-11-20T16:00:00"},
+    {"id": "M2", "plan": "ORD-C@c1", "box_serial": "S#2", "tracking": "TRK-002",
+     "weighed_kg": 2.35, "seal_scan": "SEAL-002", "sealed_at": "2026-11-20T16:05:00"}
+  ]
+}
