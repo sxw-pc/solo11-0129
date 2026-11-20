@@ -1,0 +1,393 @@
+{
+  "basis": {
+    "calibration_id": "CAL-01",
+    "candidate_load_levels_n": [
+      60.0,
+      120.0,
+      180.0
+    ],
+    "contracts": {
+      "ONESHOT-30": {
+        "certified_levels_n": [
+          120.0
+        ],
+        "certified_load_n": 120.0,
+        "contract": {
+          "confidence": 0.9,
+          "contract_id": "ONESHOT-30",
+          "description": "一次性安装卡扣：30 次循环、常温、永久变形 < 0.20 mm",
+          "hysteresis_growth_mm": 0.08,
+          "permanent_set_mm": 0.2,
+          "required_cycles": 30,
+          "risk_limit": 0.35,
+          "temperature_band_c": [
+            10.0,
+            30.0
+          ]
+        },
+        "follow_up_tests": [
+          {
+            "add_independent_plates": 6,
+            "load_level_n": 60.0,
+            "note": "no_plate_covers_contract_temperature_band",
+            "run_to_cycle": 30,
+            "temperature_band_c": [
+              10.0,
+              30.0
+            ]
+          },
+          {
+            "add_independent_plates": 6,
+            "load_level_n": 180.0,
+            "note": "no_plate_covers_contract_temperature_band",
+            "run_to_cycle": 30,
+            "temperature_band_c": [
+              10.0,
+              30.0
+            ]
+          }
+        ],
+        "levels": [
+          {
+            "failure_plates": 0,
+            "failure_risk_upper_bound": null,
+            "independent_plates": 0,
+            "load_level_n": 60.0,
+            "meets_limit": false,
+            "non_pass_plates": 0,
+            "pending_calibration": false,
+            "plate_outcomes": [
+              {
+                "build_plate": "P1",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S02"
+                ]
+              },
+              {
+                "build_plate": "P2",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S04"
+                ]
+              },
+              {
+                "build_plate": "P3",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S06"
+                ]
+              },
+              {
+                "build_plate": "P4",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S08"
+                ]
+              }
+            ],
+            "risk_limit": 0.35
+          },
+          {
+            "failure_plates": 0,
+            "failure_risk_upper_bound": 0.31870793094203875,
+            "independent_plates": 6,
+            "load_level_n": 120.0,
+            "meets_limit": true,
+            "non_pass_plates": 0,
+            "pending_calibration": false,
+            "plate_outcomes": [
+              {
+                "build_plate": "P1",
+                "outcome": "survived",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S01"
+                ]
+              },
+              {
+                "build_plate": "P2",
+                "outcome": "survived",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S03"
+                ]
+              },
+              {
+                "build_plate": "P3",
+                "outcome": "survived",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S05"
+                ]
+              },
+              {
+                "build_plate": "P4",
+                "outcome": "survived",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S07"
+                ]
+              },
+              {
+                "build_plate": "P5",
+                "outcome": "survived",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S09"
+                ]
+              },
+              {
+                "build_plate": "P6",
+                "outcome": "survived",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S12"
+                ]
+              }
+            ],
+            "risk_limit": 0.35
+          },
+          {
+            "failure_plates": 0,
+            "failure_risk_upper_bound": null,
+            "independent_plates": 0,
+            "load_level_n": 180.0,
+            "meets_limit": false,
+            "non_pass_plates": 0,
+            "pending_calibration": false,
+            "plate_outcomes": [
+              {
+                "build_plate": "P5",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S10"
+                ]
+              },
+              {
+                "build_plate": "P6",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S11"
+                ]
+              }
+            ],
+            "risk_limit": 0.35
+          }
+        ]
+      },
+      "REUSE-3000": {
+        "certified_levels_n": [],
+        "certified_load_n": null,
+        "contract": {
+          "confidence": 0.9,
+          "contract_id": "REUSE-3000",
+          "description": "反复开合卡扣：3000 次循环、覆盖高温、永久变形 < 0.10 mm",
+          "hysteresis_growth_mm": 0.05,
+          "permanent_set_mm": 0.1,
+          "required_cycles": 3000,
+          "risk_limit": 0.35,
+          "temperature_band_c": [
+            45.0,
+            65.0
+          ]
+        },
+        "follow_up_tests": [
+          {
+            "add_independent_plates": 3,
+            "load_level_n": 60.0,
+            "recalibrate_plates": [
+              "P3"
+            ],
+            "run_to_cycle": 3000,
+            "temperature_band_c": [
+              45.0,
+              65.0
+            ]
+          },
+          {
+            "add_independent_plates": 6,
+            "load_level_n": 120.0,
+            "note": "no_plate_covers_contract_temperature_band",
+            "run_to_cycle": 3000,
+            "temperature_band_c": [
+              45.0,
+              65.0
+            ]
+          },
+          {
+            "add_independent_plates": 6,
+            "load_level_n": 180.0,
+            "note": "right_censored_plates_must_run_to_required_cycles",
+            "run_to_cycle": 3000,
+            "temperature_band_c": [
+              45.0,
+              65.0
+            ]
+          }
+        ],
+        "levels": [
+          {
+            "failure_plates": 0,
+            "failure_risk_upper_bound": 0.6795394162781817,
+            "independent_plates": 4,
+            "load_level_n": 60.0,
+            "meets_limit": false,
+            "non_pass_plates": 1,
+            "pending_calibration": true,
+            "plate_outcomes": [
+              {
+                "build_plate": "P1",
+                "outcome": "survived",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S02"
+                ]
+              },
+              {
+                "build_plate": "P2",
+                "outcome": "survived",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S04"
+                ]
+              },
+              {
+                "build_plate": "P3",
+                "outcome": "pending_calibration",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S06"
+                ]
+              },
+              {
+                "build_plate": "P4",
+                "outcome": "survived",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S08"
+                ]
+              }
+            ],
+            "risk_limit": 0.35
+          },
+          {
+            "failure_plates": 0,
+            "failure_risk_upper_bound": null,
+            "independent_plates": 0,
+            "load_level_n": 120.0,
+            "meets_limit": false,
+            "non_pass_plates": 0,
+            "pending_calibration": false,
+            "plate_outcomes": [
+              {
+                "build_plate": "P1",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S01"
+                ]
+              },
+              {
+                "build_plate": "P2",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-1",
+                "specimens": [
+                  "S03"
+                ]
+              },
+              {
+                "build_plate": "P3",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S05"
+                ]
+              },
+              {
+                "build_plate": "P4",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-2",
+                "specimens": [
+                  "S07"
+                ]
+              },
+              {
+                "build_plate": "P5",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S09"
+                ]
+              },
+              {
+                "build_plate": "P6",
+                "outcome": "temperature_not_covered",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S12"
+                ]
+              }
+            ],
+            "risk_limit": 0.35
+          },
+          {
+            "failure_plates": 1,
+            "failure_risk_upper_bound": 1.0,
+            "independent_plates": 2,
+            "load_level_n": 180.0,
+            "meets_limit": false,
+            "non_pass_plates": 2,
+            "pending_calibration": false,
+            "plate_outcomes": [
+              {
+                "build_plate": "P5",
+                "outcome": "right_censored",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S10"
+                ]
+              },
+              {
+                "build_plate": "P6",
+                "outcome": "failure",
+                "plate_batch": "BATCH-3",
+                "specimens": [
+                  "S11"
+                ]
+              }
+            ],
+            "risk_limit": 0.35
+          }
+        ]
+      }
+    },
+    "model": "CLIP-A",
+    "sources": {
+      "contract_file_hash": "f6843baf6bc44f4924e01332b96581eb61742fb7c501e97bb51096c5aec35d55",
+      "plate_file_hash": "8d92a982cdb26b2b47d3cf9cf27c9fe27a5c4ace25809df2c0970c3bf47c5235"
+    },
+    "specimen_count": 12,
+    "statistical_method": {
+      "censoring": "right_censored_plates_counted_as_non_pass",
+      "confidence_per_contract": {
+        "ONESHOT-30": 0.9,
+        "REUSE-3000": 0.9
+      },
+      "independent_unit": "build_plate",
+      "name": "clopper_pearson_one_sided"
+    },
+    "superseded_calibrations": [],
+    "withdrawals": []
+  },
+  "calibration_id": "CAL-01",
+  "model": "CLIP-A",
+  "rating_id": "CLIP-A:CAL-01",
+  "status": "已签发"
+}

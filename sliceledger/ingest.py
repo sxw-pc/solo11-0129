@@ -7,7 +7,8 @@ def capture(path,kind,file):
     payload=json.loads(raw)
     if not isinstance(payload,dict) or not isinstance(payload.get('version'),str) or not payload['version']:
         raise ValueError('version_required')
-    db=connect(path)
+    own=not hasattr(path,'execute')
+    db=connect(path) if own else path
     try:
         with db:
             old=db.execute('SELECT id FROM export_file WHERE kind=? AND hash=?',(kind,digest)).fetchone()
@@ -19,5 +20,5 @@ def capture(path,kind,file):
                 db.execute('INSERT INTO export_record(source_id,line_no,identity,body,status) VALUES (?,?,?,?,?)',
                            (source_id,i,identity,json.dumps(item,sort_keys=True,ensure_ascii=False),'captured'))
         return source_id,payload
-    finally:db.close()
-
+    finally:
+        if own:db.close()
