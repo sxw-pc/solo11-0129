@@ -1,6 +1,6 @@
 import sqlite3
 from pathlib import Path
-TABLES=['slice_export', 'machine_profile', 'material_lot', 'reservation', 'print_part', 'measurement', 'material_movement', 'machine_run', 'machine_event', 'lot_inspection', 'part_recall', 'packing_plan', 'carrier_manifest']
+TABLES=['slice_export', 'machine_profile', 'material_lot', 'reservation', 'print_part', 'measurement', 'material_movement', 'machine_run', 'machine_event', 'lot_inspection', 'part_recall', 'packing_plan', 'packing_layout', 'carrier_manifest', 'carrier_box']
 SCHEMA="""
 PRAGMA foreign_keys=ON;
 CREATE TABLE IF NOT EXISTS export_file(id INTEGER PRIMARY KEY,kind TEXT NOT NULL,version TEXT NOT NULL,hash TEXT NOT NULL,body BLOB NOT NULL,created TEXT DEFAULT CURRENT_TIMESTAMP,UNIQUE(kind,hash));
@@ -19,7 +19,9 @@ CREATE TABLE IF NOT EXISTS machine_event(id TEXT PRIMARY KEY,source_id INT REFER
 CREATE TABLE IF NOT EXISTS lot_inspection(id TEXT PRIMARY KEY,source_id INT REFERENCES export_file(id),version TEXT NOT NULL,body TEXT NOT NULL,status TEXT NOT NULL,reason TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS part_recall(id TEXT PRIMARY KEY,source_id INT REFERENCES export_file(id),version TEXT NOT NULL,body TEXT NOT NULL,status TEXT NOT NULL,reason TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS packing_plan(id TEXT PRIMARY KEY,source_id INT REFERENCES export_file(id),version TEXT NOT NULL,body TEXT NOT NULL,status TEXT NOT NULL,reason TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS packing_layout(id TEXT PRIMARY KEY,source_id INT REFERENCES export_file(id),version TEXT NOT NULL,body TEXT NOT NULL,status TEXT NOT NULL,reason TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS carrier_manifest(id TEXT PRIMARY KEY,source_id INT REFERENCES export_file(id),version TEXT NOT NULL,body TEXT NOT NULL,status TEXT NOT NULL,reason TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS carrier_box(id TEXT PRIMARY KEY,source_id INT REFERENCES export_file(id),version TEXT NOT NULL,body TEXT NOT NULL,status TEXT NOT NULL,reason TEXT NOT NULL);
 """
 def connect(path):
     p=Path(path);p.parent.mkdir(parents=True,exist_ok=True)

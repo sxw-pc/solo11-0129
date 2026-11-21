@@ -1,0 +1,23 @@
+{
+  "version": "v1",
+  "rows": [
+    {
+      "id": "M1",
+      "packing": "ORD-MULTI",
+      "box_no": "S#1",
+      "tracking": "TRK-S#1",
+      "seal": "SEAL-S#1",
+      "weighed": 1.9,
+      "scanned_at": "2026-11-21T16:00:00"
+    },
+    {
+      "id": "M2",
+      "packing": "ORD-MULTI",
+      "box_no": "S#2",
+      "tracking": "TRK-S#2",
+      "seal": "SEAL-S#2",
+      "weighed": 1.9,
+      "scanned_at": "2026-11-21T16:05:00"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "version": "v1",
+  "rows": [
+    {
+      "id": "ORD-SINGLE",
+      "contract": "single",
+      "pack_start": "2026-11-21T15:00:00",
+      "cutoff": "2026-11-21T18:00:00",
+      "parts": [
+        {
+          "id": "P1",
+          "size": [
+            280,
+            110,
+            40
+          ],
+          "weight": 1.5,
+          "cushion": 5,
+          "fragile_faces": [
+            "+z"
+          ],
+          "rotations": [
+            {
+              "name": "flat",
+              "axes": [
+                0,
+                1,
+                2
+              ],
+              "up": "+z"
+            },
+            {
+              "name": "flat-90",
+              "axes": [
+                1,
+                0,
+                2
+              ],
+              "up": "+z"
+            }
+          ]
+        },
+        {
+          "id": "P2",
+          "size": [
+            280,
+            110,
+            40
+          ],
+          "weight": 1.5,
+          "cushion": 5,
+          "fragile_faces": [
+            "+z"
+          ],
+          "rotations": [
+            {
+              "name": "flat",
+              "axes": [
+                0,
+                1,
+                2
+              ],
+              "up": "+z"
+            },
+            {
+              "name": "flat-90",
+              "axes": [
+                1,
+                0,
+                2
+              ],
+              "up": "+z"
+            }
+          ]
+        }
+      ],
+      "boxes": [
+        {
+          "type": "S",
+          "inner": [
+            300,
+            200,
+            120
+          ],
+          "max_weight": 8,
+          "count": 4,
+          "certified": false,
+          "tare": 0.4,
+          "handling_minutes": 20
+        },
+        {
+          "type": "L",
+          "inner": [
+            450,
+            180,
+            300
+          ],
+          "max_weight": 30,
+          "count": 0,
+          "certified": true,
+          "tare": 1.2,
+          "handling_minutes": 40
+        }
+      ],
+      "carrier": {
+        "dim_divisor": 5000,
+        "weight_tolerance": 0.2,
+        "tiers": [
+          {
+            "up_to": 2,
+            "price": 8
+          },
+          {
+            "up_to": 5,
+            "price": 12
+          },
+          {
+            "up_to": 10,
+            "price": 30
+          },
+          {
+            "up_to": 20,
+            "price": 45
+          }
+        ]
+      }
+    }
+  ]
+}
